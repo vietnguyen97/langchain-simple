@@ -1,8 +1,15 @@
 # Git Auto Commit Skill
 
-Skill này tự động thực hiện các bước sau:
-1. Chạy `git add .` để thêm tất cả các thay đổi.
-2. Tạo commit message tự động.
-3. Push code lên nhánh hiện tại.
+## Description
+Automatically:
+1. git add .
+2. git commit
+3. git push current branch
 
-Skill có thể được triển khai bằng JavaScript hoặc các ngôn ngữ khác.
+## Parameters
+- message (optional): custom commit message
+
+## Behavior
+- If message is provided → use it
+- If not → auto generate commit message
+- If no changes → skip commit
