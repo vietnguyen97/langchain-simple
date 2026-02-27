@@ -1,5 +1,6 @@
 import express, { Request } from 'express';
 import { agentWeather } from './src/functions/get-weather.js';
+import { chainBase } from './src/functions/chain.js';
 
 const app = express();
 const port: number = 3000;
@@ -24,6 +25,15 @@ app.get('/weather', async (req: Request, res: any) => {
     }
 });
 
+app.get('/chain-base', async (req: Request, res: any) => {
+    try {
+        const chain = await chainBase("langchain");
+        res.json(chain);
+    } catch (error) {
+        console.error("Error: chain-base", error);
+        res.status(500).send("An error occurred while processing your request.");
+    }
+})
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
