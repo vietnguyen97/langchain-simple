@@ -1,6 +1,7 @@
 import express, { Request } from 'express';
 import { agentWeather } from './src/functions/get-weather.js';
 import { chainBase } from './src/functions/chain.js';
+import { ReActAgent } from './src/functions/react-agent-base.js';
 
 const app = express();
 const port: number = 3000;
@@ -31,6 +32,19 @@ app.get('/chain-base', async (req: Request, res: any) => {
         res.json(chain);
     } catch (error) {
         console.error("Error: chain-base", error);
+        res.status(500).send("An error occurred while processing your request.");
+    }
+})
+
+app.get('/react-agent', async (req: Request, res: any) => {
+    try {
+        const chain = await ReActAgent('What is the capital og Vietnam?');
+        if (chain) {
+            res.json(chain.content);
+        }
+        res.status(500).send("An error occurred while processing your request.");
+    } catch (error) {
+        console.error("Error: ReAct Agent", error);
         res.status(500).send("An error occurred while processing your request.");
     }
 })
